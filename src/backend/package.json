@@ -7,7 +7,8 @@
     "test": "jest",
     "test-unit": "jest test/unit",
     "test-integration": "jest test/integration",
-    "lint": "eslint *.js"
+    "lint": "eslint *.js",
+    "lint-fix": "eslint --fix *.js"
   },
   "dependencies": {
     "bitgo": "^4.37.1",
