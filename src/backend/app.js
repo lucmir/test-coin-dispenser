@@ -3,12 +3,11 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var faucet = require('./routes/faucet');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
-
-var users = require('./routes/users');
 
 var app = express();
 
@@ -16,6 +15,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/api/v1/users', users);
+/*
+  routes
+*/
+app.use('/', faucet);
 
 module.exports = app;

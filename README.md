@@ -4,6 +4,8 @@
 
 A (very) simple tool to distribute test coins (e.g. test Bitcoin).
 
+Refer to the [project issues](https://github.com/lucmir/test-coin-dispenser/issues) for a list of known issues, feature requests and questions. Please, feel free to contribute with issues or PRs.
+
 
 ## Running Instructions
 
