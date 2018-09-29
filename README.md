@@ -7,10 +7,15 @@ A (very) simple tool to distribute test coins (e.g. test Bitcoin).
 
 ## Running Instructions
 
+
 ### Backend
 
 Backend is an express application.
 
+In order to run the backend application you will need to setup the required environment variables.
+Create an `.env` file by just copying from the `.env.example` file and set the values for the variables defined there.
+
+The following commands will start the application:
 ```
 $ cd src/backend
 $ npm install
