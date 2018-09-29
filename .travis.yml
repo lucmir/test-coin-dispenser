@@ -4,6 +4,13 @@ node_js:
 before_install:
   - cd ./src/backend
 
-script:
-  - npm run lint
-  - npm run test
+jobs:
+  include:
+    - stage: "Lint"
+      name: "Lint check"
+      script: npm run lint
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: npm run test-unit
+    - script: npm run test-integration   
+      name: "Integration Tests"
