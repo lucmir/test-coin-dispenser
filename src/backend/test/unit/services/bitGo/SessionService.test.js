@@ -1,22 +1,22 @@
-let SessionService = require('../../../../services/bitGo/SessionService');
 let bitgo = require('bitgo');
+let SessionService = require('../../../../services/bitGo/SessionService');
 
 describe('SessionService', () => {
+  var sessionService;
   var sessionInfoData = {
     id: 'id',
     client: 'bitgo',
-    expires: '2028-09-23T02:25:05.380Z',
+    expires: '2030-09-29T02:21:05.320Z',
     origin: 'test.bitgo.com'
   };
 
-  var sessionService;
   beforeEach(() => {
     mockBitGoSession(false, sessionInfoData);
     sessionService = SessionService('accessToken');
   });
 
   describe('#createSession', () => {
-    it('returns a valid session', (done) => {
+    it('creates a session and returns session info', (done) => {
       sessionService.createSession().then(session => {
         expect(session).toBeDefined();
         expect(session.info).toBe(sessionInfoData);
