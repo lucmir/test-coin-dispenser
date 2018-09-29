@@ -1,4 +1,5 @@
-let bitgo = require('bitgo');
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
+
 let WalletService = require('../../../../services/bitGo/WalletService');
 
 describe('WalletService', () => {
@@ -6,7 +7,7 @@ describe('WalletService', () => {
   var testWalletId = Math.random();
 
   beforeEach(() => {
-    sessionMock = mockSession(testWalletId);
+    var sessionMock = mockSession(testWalletId);
     walletService = WalletService(sessionMock);
   });
 
@@ -23,10 +24,10 @@ describe('WalletService', () => {
 
   describe('#send', () => {
     it('sends cash to an address and returns transfer info', (done) => {
-      walletService.send(testWalletId, "address", 0.1, "").then(
+      walletService.send(testWalletId, 'address', 0.1, '').then(
         transfer => {
           expect(transfer).toBeDefined();
-          expect(transfer.id).toBe("transfer-id");
+          expect(transfer.id).toBe('transfer-id');
           done();
         });
     });
@@ -37,8 +38,8 @@ describe('WalletService', () => {
       coin: jest.fn(() => {
         return { wallets: mockWallets(walletId) };
       }),
-      unlock: (session) => Promise.resolve({}),
-      lock: (session) => Promise.resolve({})
+      unlock: () => Promise.resolve({}),
+      lock: () => Promise.resolve({})
     };
   };
 
@@ -51,16 +52,16 @@ describe('WalletService', () => {
     };
     return jest.fn(() => {
       return {
-        get: (walletId) => Promise.resolve(walletData)
+        get: (_walletId) => Promise.resolve(walletData)
       };
     });
   };
 
   const mockSend = () => {
     return jest.fn(
-      (address, amount, p) => Promise.resolve({
-        id: "transfer-id",
-        address: address
+      (_address, _amount, _passphrase) => Promise.resolve({
+        id: 'transfer-id',
+        address: _address
       })
     );
   };

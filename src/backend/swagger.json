@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A (very) simple tool to distribute test coins (e.g. test Bitcoin).",
+    "version": "1.0.0",
+    "title": "Test Coin Dispenser API",
+    "contact": {
+      "name": "Lucas Cunha",
+      "email": "luccmir@gmail.com"
+    }
+  },
+  "basePath": "/",
+  "paths": {
+    "/info": {
+      "get": {
+        "summary": "Get Faucet info",
+        "description": "Retrieve faucet information",
+        "operationId": "getFaucetWalletInfo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/FaucetInfo"
+            }
+          }
+        }
+      }
+    },
+    "/transfer": {
+      "post": {
+        "summary": "Transfer request",
+        "description": "Request a transfer of fixed value to an address",
+        "operationId": "transfer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferParameters"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "transfer request created",
+            "schema": {
+              "$ref": "#/definitions/TransferInfo"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameter"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FaucetInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "string"
+        }
+      }
+    },
+    "TransferParameters": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "TransferInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
+/*eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
+
 let FaucetService = require('../../../services/FaucetService');
-let SessionService = require('../../../services/bitGo/SessionService');
-let WalletService = require('../../../services/bitGo/WalletService');
 
 describe('FaucetService', () => {
   var faucetService;
 
   var walletData = {
-    id: "wallet-id",
+    id: 'wallet-id',
     balance: 1
   };
 
@@ -32,7 +32,7 @@ describe('FaucetService', () => {
   const mockSessionService = () => {
     return () => {
       return  {
-        createSession: (token) => Promise.resolve({})
+        createSession: (_token) => Promise.resolve({})
       };
     };
   };
@@ -40,12 +40,12 @@ describe('FaucetService', () => {
   const mockWalletService = () => {
     return () => {
       return  {
-        getWalletInfo: (walletId) => Promise.resolve({
+        getWalletInfo: (_walletId) => Promise.resolve({
           id: walletData.id,
           balance: walletData.balance,
-          otherAttribute: "other"
+          otherAttribute: 'other'
         }),
-        send: (walletId, toAddress, amount, passphrase) => Promise.resolve(
+        send: (_walletId, _toAddress, _amount, _passphrase) => Promise.resolve( 
           transferData
         )
       };

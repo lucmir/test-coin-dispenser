@@ -27,7 +27,7 @@ describe('SessionService', () => {
 
   const mockBitGoSession = (success, sessionData) => {
     var fakeSession = jest.fn().mockImplementation(
-      ({}, cb) => { return cb(success, sessionData); }
+      (obj, cb) => { return cb(success, sessionData); }
     );
     var fakeBitGo = jest.fn(() => {
       return { session: fakeSession };

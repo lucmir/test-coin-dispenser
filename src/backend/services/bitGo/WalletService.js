@@ -1,5 +1,3 @@
-var BitGoJS = require('bitgo');
-
 const WalletService = (session) => {
   const OTP = '0000000';
   const DEFAULT_COIN = 'tbtc';
@@ -8,7 +6,7 @@ const WalletService = (session) => {
     return new Promise((resolve, reject) => {
       _getWallet(walletId, walletCoin).then(wallet => {
         resolve(wallet._wallet);
-      });
+      }).catch(err => reject(err));
     });
   };
 
@@ -20,14 +18,14 @@ const WalletService = (session) => {
     };
     return new Promise((resolve, reject) => {
       _getWallet(fromWalletId).then(wallet => {
-        _unlock(session).then(response => {
+        _unlock(session).then(() => {
           wallet.send(params).then(transaction => {
-            _lock(session).then(response => {
+            _lock(session).then(() => {
               resolve(transaction);
             });
           });
         });
-      });
+      }).catch(err => reject(err));
     });
   };
 
@@ -36,7 +34,7 @@ const WalletService = (session) => {
     return new Promise((resolve, reject) => {
       wallets.get({ id: walletId }).then(wallet => {
         resolve(wallet);
-      });
+      }).catch(err => reject(err));
     });
   };
 

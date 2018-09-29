@@ -15,7 +15,7 @@ const FaucetService = (
               id: walletInfo.id,
               balance: walletInfo.balance
             });
-          });
+          }).catch(err => reject(err));
       });
     });
   };
@@ -32,7 +32,7 @@ const FaucetService = (
         WalletService(session).send(...params)
           .then(transferInfo => {
             resolve(transferInfo);
-          });
+          }).catch(err => reject(err));
       });
     });
   };
