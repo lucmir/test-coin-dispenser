@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test-unit": "jest test/unit",
     "test-integration": "jest --runInBand test/integration",
     "test-coverage": "jest --runInBand --coverage test",
-    "lint": "eslint *.js",
-    "lint-fix": "eslint --fix *.js"
+    "lint": "eslint services routes test --ext js",
+    "lint-fix": "eslint services routes test --ext js --fix"
   },
   "dependencies": {
     "bitgo": "^4.37.1",

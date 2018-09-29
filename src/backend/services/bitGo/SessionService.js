@@ -1,7 +1,6 @@
 const BitGoJS = require('bitgo');
 
 const SessionService = (accessToken) => {
-
   var bitgo = new BitGoJS.BitGo({
     env: 'test',
     accessToken: accessToken

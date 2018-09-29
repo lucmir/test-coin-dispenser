@@ -15,7 +15,6 @@ describe('TransferRoute', () => {
 
     it('returns status 201 (CREATED) and content type json', (done) => {
       request(app).get('/')
-        .expect('Content-Type', /json/)
         .expect(201, done);
     });
 

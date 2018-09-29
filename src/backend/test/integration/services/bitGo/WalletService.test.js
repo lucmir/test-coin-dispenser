@@ -22,7 +22,7 @@ describe('WalletService', () => {
             expect(walletInfo).toBeDefined();
             expect(walletInfo.id).toBe(testWalletId);
             done();
-        }).catch();
+          }).catch();
       });
     });
   });
@@ -30,7 +30,7 @@ describe('WalletService', () => {
   describe('#send', () => {
     it('sends cash and returns transfer info', (done) => {
       let amount = 10000;
-      params = [
+      let params = [
         faucetWalletId,
         testWalletAddress,
         amount,
