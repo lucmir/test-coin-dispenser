@@ -22,7 +22,9 @@ const WalletService = (session) => {
       _getWallet(fromWalletId).then(wallet => {
         _unlock(session).then(response => {
           wallet.send(params).then(transaction => {
-            resolve(transaction);
+            _lock(session).then(response => {
+              resolve(transaction);
+            });
           });
         });
       });
@@ -40,6 +42,10 @@ const WalletService = (session) => {
 
   const _unlock = (session) => {
     return session.unlock({ otp: OTP });
+  };
+
+  const _lock = (session) => {
+    return session.lock({ otp: OTP });
   };
 
   return {

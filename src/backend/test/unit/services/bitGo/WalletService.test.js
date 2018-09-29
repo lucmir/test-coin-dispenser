@@ -37,7 +37,8 @@ describe('WalletService', () => {
       coin: jest.fn(() => {
         return { wallets: mockWallets(walletId) };
       }),
-      unlock: (session) => Promise.resolve({})
+      unlock: (session) => Promise.resolve({}),
+      lock: (session) => Promise.resolve({})
     };
   };
 
