@@ -11,7 +11,7 @@ describe('WalletService', () => {
   let sessionService = SessionService(accessToken);
 
   beforeAll(() => {
-    jest.setTimeout(30000); // 20s
+    jest.setTimeout(30000); // 30s
   });
 
   describe('#getWalletInfo', () => {

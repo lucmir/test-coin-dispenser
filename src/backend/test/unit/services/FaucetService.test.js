@@ -10,6 +10,12 @@ describe('FaucetService', () => {
     balance: 1
   };
 
+  var transferData = {
+    txid: 'id',
+    tx: 'a-big-hash',
+    status: 'signed'
+  };
+
   beforeAll(() => {
     faucetService = FaucetService(mockSessionService(), mockWalletService());
   });
@@ -38,7 +44,10 @@ describe('FaucetService', () => {
           id: walletData.id,
           balance: walletData.balance,
           otherAttribute: "other"
-        })
+        }),
+        send: (walletId, toAddress, amount, passphrase) => Promise.resolve(
+          transferData
+        )
       };
     };
   };
