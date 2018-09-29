@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest",
+    "test": "jest --runInBand --coverage",
     "test-unit": "jest test/unit",
-    "test-integration": "jest test/integration",
-    "test-coverage": "jest --coverage",
+    "test-integration": "jest --runInBand test/integration",
     "lint": "eslint *.js",
     "lint-fix": "eslint --fix *.js"
   },
