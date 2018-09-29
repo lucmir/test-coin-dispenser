@@ -1,4 +1,3 @@
-var config = require('config');
 var SessionService = require('../../../../services/bitGo/SessionService');
 
 describe('SessionService', () => {

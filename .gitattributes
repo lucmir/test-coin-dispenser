@@ -1,3 +1,0 @@
-src/backend/config/test.json filter=git-crypt diff=git-crypt
-src/backend/config/development.json filter=git-crypt diff=git-crypt
-src/backend/config/production.json filter=git-crypt diff=git-crypt

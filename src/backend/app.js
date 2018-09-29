@@ -4,6 +4,10 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
+
 var users = require('./routes/users');
 
 var app = express();
