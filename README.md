@@ -24,3 +24,5 @@ $ npm install
 $ npm run start
 ```
 
+With the running application, the API documentation will be available on `http://localhost:3000/`.
+
