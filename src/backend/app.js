@@ -3,6 +3,7 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var transfer = require('./routes/transfer');
 var faucet = require('./routes/faucet');
 
 if (process.env.NODE_ENV !== 'production') {
@@ -18,6 +19,7 @@ app.use(cookieParser());
 /*
   routes
 */
+app.use('/transfer', transfer);
 app.use('/', faucet);
 
 module.exports = app;
