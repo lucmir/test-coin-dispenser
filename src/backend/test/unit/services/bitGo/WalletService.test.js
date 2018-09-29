@@ -21,11 +21,23 @@ describe('WalletService', () => {
     });
   });
 
+  describe('#send', () => {
+    it('sends cash to an address and returns transfer info', (done) => {
+      walletService.send(testWalletId, "address", 0.1, "").then(
+        transfer => {
+          expect(transfer).toBeDefined();
+          expect(transfer.id).toBe("transfer-id");
+          done();
+        });
+    });
+  });
+
   const mockSession = (walletId) => {
     return {
       coin: jest.fn(() => {
         return { wallets: mockWallets(walletId) };
-      })
+      }),
+      unlock: (session) => Promise.resolve({})
     };
   };
 
@@ -33,12 +45,22 @@ describe('WalletService', () => {
     var walletData = {
       _wallet: {
         id: walletId
-      }
+      },
+      send: mockSend()
     };
     return jest.fn(() => {
       return {
         get: (walletId) => Promise.resolve(walletData)
       };
     });
+  };
+
+  const mockSend = () => {
+    return jest.fn(
+      (address, amount, p) => Promise.resolve({
+        id: "transfer-id",
+        address: address
+      })
+    );
   };
 });
