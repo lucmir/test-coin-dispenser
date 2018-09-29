@@ -3,10 +3,11 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var transfer = require('./routes/transfer');
-var faucet = require('./routes/faucet');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+var transfer = require('./routes/transfer');
+var faucet = require('./routes/faucet');
+var index = require('./routes/index');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
@@ -21,8 +22,9 @@ app.use(cookieParser());
 /*
   routes
 */
+app.use('/', index);
 app.use('/transfer', transfer);
 app.use('/info', faucet);
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = app;
