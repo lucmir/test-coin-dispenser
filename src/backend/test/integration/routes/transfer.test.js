@@ -13,10 +13,10 @@ describe('TransferRoute', () => {
       address: testWalletAddress
     };
 
-    it('returns status 200 (OK) and content type json', (done) => {
+    it('returns status 201 (CREATED) and content type json', (done) => {
       request(app).get('/')
         .expect('Content-Type', /json/)
-        .expect(200, done);
+        .expect(201, done);
     });
 
     it('returns response with faucet wallet info', (done) => {

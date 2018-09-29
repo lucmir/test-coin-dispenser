@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
   let toAddress = req.body.address;
   faucetService.transfer(toAddress, transferAmount)
     .then(transferInfo => {
-      res.status(200).send(formatTransferInfo(transferInfo));
+      res.status(201).send(formatTransferInfo(transferInfo));
     }).catch();
 });
 
