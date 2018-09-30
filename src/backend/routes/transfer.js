@@ -2,14 +2,14 @@ var express = require('express');
 const FaucetService = require('../services/FaucetService');
 var router = express.Router();
 
-const TRANSFER_AMOUNT = process.env.FAUCET_TRANSFER_AMOUNT;
-
 router.post('/', function(req, res) {
   let faucetService = FaucetService();
   let toAddress = req.body.address;
+  let amount = process.env.FAUCET_TRANSFER_AMOUNT;
 
-  faucetService.transfer(toAddress, TRANSFER_AMOUNT)
+  faucetService.transfer(toAddress, amount)
     .then(transferInfo => {
+      transferInfo.amount = amount;
       res.status(201).send(formatTransferInfo(transferInfo));
     }).catch();
 });
@@ -18,7 +18,7 @@ const formatTransferInfo = (transferInfo) => (
   {
     id: transferInfo.txid,
     status: transferInfo.status,
-    amount: TRANSFER_AMOUNT
+    amount: transferInfo.amount 
   }
 );
 
