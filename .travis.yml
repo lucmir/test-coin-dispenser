@@ -4,17 +4,21 @@ node_js:
 
 jobs:
   include:
-    - stage: "Backend"
-      script: npm run lint
-      before_script: cd ./src/backend
-      name: "Lint check"
-    - script: npm run test-unit
-      before_script: cd ./src/backend
-      name: "Unit Tests"
-    - script: npm run test-integration   
-      before_script: cd ./src/backend
-      name: "Integration Tests"
     - stage: "Client app"
-      script: CI=true npm run test
-      before_script: cd ./src/client
+      script:
+        - cd src/client
+        - CI=true npm run test
       name: "Tests"
+    - stage: "Backend"
+      script:
+        - cd src/backend
+        - npm run lint
+      name: "Lint check"
+    - script:
+        - cd src/backend
+        - npm run test-unit
+      name: "Unit Tests"
+    - script:
+        - cd src/backend
+        - npm run test-integration
+      name: "Integration Tests"
