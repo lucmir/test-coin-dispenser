@@ -5,7 +5,8 @@ describe('CoinDispenserClient', () => {
   describe('#transfer', () => {
     const transferData = {
       id: "transfer-id",
-      status: "signed"
+      status: "signed",
+      amount: "10000"
     };
 
     describe('When request is successful', () => {
@@ -22,6 +23,7 @@ describe('CoinDispenserClient', () => {
         CoinDispenserClient.transfer('address').then((transferInfo) => {
           expect(transferInfo.data.id).toEqual(transferData.id);
           expect(transferInfo.data.status).toEqual(transferData.status);
+          expect(transferInfo.data.amount).toEqual(transferData.amount);
           done();
         });
       });

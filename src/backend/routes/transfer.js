@@ -3,7 +3,7 @@ const FaucetService = require('../services/FaucetService');
 var router = express.Router();
 
 router.post('/', function(req, res) {
-  let transferAmount = process.env.FAUCET_TRANSFER_AMOUNT;
+  let transferAmount = process.env.FAUCET_TRANSFER_AMOUNT || 10000;
   let faucetService = FaucetService();
   let toAddress = req.body.address;
 
@@ -16,7 +16,8 @@ router.post('/', function(req, res) {
 const formatTransferInfo = (transferInfo) => (
   {
     id: transferInfo.txid,
-    status: transferInfo.status
+    status: transferInfo.status,
+    amount: transferAmount
   }
 );
 
