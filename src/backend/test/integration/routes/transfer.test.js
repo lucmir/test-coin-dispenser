@@ -20,6 +20,7 @@ describe('TransferRoute', () => {
           var transferInfo = res.body;
           expect(transferInfo).toBeDefined();
           expect(transferInfo.id).toBeDefined();
+          expect(transferInfo.amount).toBeDefined();
           expect(transferInfo.status).toBe('signed');
           expect(res.status).toBe(201);
           done();
