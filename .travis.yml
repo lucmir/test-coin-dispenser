@@ -7,18 +7,22 @@ jobs:
     - stage: "Client app"
       script:
         - cd src/client
+        - npm install
         - CI=true npm run test
       name: "Tests"
     - stage: "Backend"
       script:
         - cd src/backend
+        - npm install
         - npm run lint
       name: "Lint check"
     - script:
         - cd src/backend
+        - npm install
         - npm run test-unit
       name: "Unit Tests"
     - script:
         - cd src/backend
+        - npm install
         - npm run test-integration
       name: "Integration Tests"
