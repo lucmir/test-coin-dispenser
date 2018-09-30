@@ -1,16 +1,16 @@
 language: node_js
 node_js:
   - "9"
-before_install:
-  - cd ./src/backend
 
 jobs:
   include:
-    - stage: "Lint"
+    - stage: "Backend"
+      script: cd ./src/backend; npm run lint
       name: "Lint check"
-      script: npm run lint
-    - stage: "Tests"
+    - script: cd ./src/backend; npm run test-unit
       name: "Unit Tests"
-      script: npm run test-unit
-    - script: npm run test-integration   
+    - script: cd ./src/backend; npm run test-integration   
       name: "Integration Tests"
+    - stage: "Client app"
+      script: cd ./src/client; CI=true npm run test
+      name: "Tests"
