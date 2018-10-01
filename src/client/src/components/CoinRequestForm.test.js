@@ -44,12 +44,12 @@ describe('CoinRequestForm', () => {
       expect(wrapper.find('div.ResultSuccess').exists()).toBe(true);
     });
 
-    it("expect to render result if the request fails", async () => {
+    it("expect to render error message if the request fails", async () => {
       mockErrorResponse();
       let wrapper = mount(<CoinRequestForm />);
       await wrapper.find('form').simulate('submit');
       wrapper.update();
-      expect(wrapper.find('div.ResultError').exists()).toBe(true);
+      expect(wrapper.find('div.ResultSuccess').exists()).toBe(false);
     });
 
     const mockSuccessResponse = () => {
@@ -66,9 +66,11 @@ describe('CoinRequestForm', () => {
 
     const mockErrorResponse = () => {
       mockCoinDispenserClient.transfer = jest.fn(
-        () => Promise.resolve({
-          data: {
-            error: "invalid address"
+        () => Promise.reject({
+          response: {
+            data: {
+              error: "invalid address"
+            },
           },
           status: 400
         })

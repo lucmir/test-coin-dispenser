@@ -44,8 +44,6 @@ class CoinRequestForm extends React.Component {
   }
 
   processRequestResult(result, error = false) {
-    console.log("here");
-    console.log(result);
     if(error) {
       this.setState({
         requesting: false,
