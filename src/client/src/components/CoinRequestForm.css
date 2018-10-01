@@ -38,8 +38,13 @@
   width: 140px;
 }
 
-.FormResult {
+.ResultSuccess {
   color: green; 
+  margin-top: 50px;
+}
+
+.ResultError {
+  color: darkRed; 
   margin-top: 50px;
 }
 

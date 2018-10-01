@@ -13,7 +13,8 @@ class CoinRequestForm extends React.Component {
       result: {
         id: null,
         amount: null
-      }
+      },
+      error: null
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,7 +25,8 @@ class CoinRequestForm extends React.Component {
     this.setState({
       address: event.target.value,
       displayResult: false,
-      requesting: false
+      requesting: false,
+      error: null
     });
   }
 
@@ -33,35 +35,62 @@ class CoinRequestForm extends React.Component {
       requesting: true
     });
 
-    CoinDispenserClient.transfer(this.state.address).then(
-      result => this.processRequestResult(result)
-    );
+    CoinDispenserClient.transfer(this.state.address).then(result => {
+      this.processRequestResult(result);
+    }).catch(result => {
+      this.processRequestResult(result.response, true);
+    });
     event.preventDefault();
   }
 
-  processRequestResult(result) {
-    this.setState({
-      requesting: false,
-      displayResult: true,
-      result: result.data
-    });
+  processRequestResult(result, error = false) {
+    console.log("here");
+    console.log(result);
+    if(error) {
+      this.setState({
+        requesting: false,
+        displayResult: true,
+        error: result.data.error
+      });
+    } else {
+      this.setState({
+        requesting: false,
+        displayResult: true,
+        result: result.data,
+        error: false
+      });
+    }
   } 
 
   renderResult() {
     let result = null;
     if(this.state.displayResult) {
-      result = (
-        <div className="FormResult">
-          <strong>
-            It was transferred {this.state.result.amount / 1e8} tbtc to your wallet!
-          </strong>
-          <div className="FormResultContent">
-            <p>ID: {this.state.result.id}</p>
-          </div>
-        </div>
-      );
+      result = (this.state.error) ?
+        this.renderResultError() : this.renderResultSuccess();
     }
     return result;
+  }
+
+  renderResultSuccess() {
+    return (
+      <div className="ResultSuccess">
+        <strong>
+          It was transferred {this.state.result.amount / 1e8} tbtc to your wallet!
+        </strong>
+        <div className="FormResultContent"><p>ID: {this.state.result.id}</p></div>
+      </div>
+    );
+  }
+
+  renderResultError() {
+    return (
+      <div className="ResultError">
+        <strong>
+          Could not complete your request
+        </strong>
+        <div className="FormResultContent"><p>Error: {this.state.error}</p></div>
+      </div>
+    );
   }
 
   renderSpinner() {
@@ -80,7 +109,11 @@ class CoinRequestForm extends React.Component {
         <div>What is your wallet address?</div>
         <form onSubmit={this.handleSubmit}>
           <label className="FormLabel">
-            <input type="text" className="FormInput" value={this.state.address} onChange={this.handleChange} />
+          <input type="text"
+                 className="FormInput"
+                 value={this.state.address}
+                 onChange={this.handleChange}
+          />
           </label>
           <input type="submit"
                  value="Request"

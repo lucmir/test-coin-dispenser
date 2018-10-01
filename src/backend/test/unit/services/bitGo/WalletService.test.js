@@ -42,8 +42,7 @@ describe('WalletService', () => {
           expect(response).toBeDefined();
           expect(response.result.error).toBe('invalid address');
           done();
-        }
-        );
+        });
     });
   });
 

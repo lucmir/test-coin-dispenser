@@ -19,7 +19,8 @@ describe('CoinRequestForm', () => {
     });
 
     it("does not render results initially", () => {
-      expect(wrapper.find('div.FormResult').exists()).toBe(false);
+      expect(wrapper.find('div.ResultSuccess').exists()).toBe(false);
+      expect(wrapper.find('div.ResultError').exists()).toBe(false);
     });
 
     it("does not render loader", () => {
@@ -28,21 +29,27 @@ describe('CoinRequestForm', () => {
   });
 
   describe('form submission', () => {
-    let wrapper;
-    beforeAll(() => {
-      mockSuccessResponse();
-      wrapper = mount(<CoinRequestForm />);
-    });
-
     it("expect to be loading", () => {
+      mockSuccessResponse();
+      let wrapper = mount(<CoinRequestForm />);
       wrapper.find('input.SubmitInput').simulate('submit');
       expect(wrapper.find('img.Spinner').exists()).toBe(true);
     });
 
     it("expect to render result", async () => {
+      mockSuccessResponse();
+      let wrapper = mount(<CoinRequestForm />);
       await wrapper.find('form').simulate('submit');
       wrapper.update();
-      expect(wrapper.find('div.FormResult').exists()).toBe(true);
+      expect(wrapper.find('div.ResultSuccess').exists()).toBe(true);
+    });
+
+    it("expect to render result if the request fails", async () => {
+      mockErrorResponse();
+      let wrapper = mount(<CoinRequestForm />);
+      await wrapper.find('form').simulate('submit');
+      wrapper.update();
+      expect(wrapper.find('div.ResultError').exists()).toBe(true);
     });
 
     const mockSuccessResponse = () => {
@@ -53,6 +60,17 @@ describe('CoinRequestForm', () => {
             amount: "1000"
           },
           status: 201
+        })
+      );
+    };
+
+    const mockErrorResponse = () => {
+      mockCoinDispenserClient.transfer = jest.fn(
+        () => Promise.resolve({
+          data: {
+            error: "invalid address"
+          },
+          status: 400
         })
       );
     };
