@@ -29,5 +29,14 @@ describe('FaucetService', () => {
           done();
         }).catch();
     });
+
+    it('fails if address is wrong', (done) => {
+      let littleAmount = 10000;
+      faucetService.transfer('wrong-address', littleAmount)
+        .then().catch(response => {
+          expect(response.result.error).toBe('invalid address');
+          done();
+        });
+    });
   });
 });

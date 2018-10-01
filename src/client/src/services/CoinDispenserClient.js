@@ -5,7 +5,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 class CoinDispenserClient {
 
   transfer(toAddress) {
-    var request_url = `${API_BASE_URL}/trasnfer`; 
+    var request_url = `${API_BASE_URL}/transfer`; 
     var request_body = {
       address: toAddress
     };
@@ -13,4 +13,4 @@ class CoinDispenserClient {
   }
 }
 
-export default new CoinDispenserClient;
+export default new CoinDispenserClient();

@@ -9,11 +9,10 @@ describe('TransferRoute', () => {
   });
 
   describe('POST /transfer', () => {
-    let requestData = {
-      address: testWalletAddress
-    };
-
-    it('returns 201 (CREATED) response with faucet wallet info', (done) => {
+    it('returns 201 response with faucet wallet info', (done) => {
+      let requestData = {
+        address: testWalletAddress
+      };
       request(app)
         .post('/transfer')
         .send(requestData).end((err, res) => {
@@ -23,6 +22,21 @@ describe('TransferRoute', () => {
           expect(transferInfo.amount).toBeDefined();
           expect(transferInfo.status).toBe('signed');
           expect(res.status).toBe(201);
+          done();
+        });
+    });
+
+    it('returns 400 (Bad request) with error msg if address is wrong', (done) => {
+      let requestData = {
+        address: 'wrong-address'
+      };
+      request(app)
+        .post('/transfer')
+        .send(requestData).end((err, res) => {
+          var body = res.body;
+          expect(body).toBeDefined();
+          expect(body.error).toBe('invalid address');
+          expect(res.status).toBe(400);
           done();
         });
     });

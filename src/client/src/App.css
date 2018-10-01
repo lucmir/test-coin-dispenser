@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite 5s linear;
   height: 80px;
 }
 
@@ -15,11 +15,13 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
 .App-intro {
   font-size: large;
+  font-size: 1.4em;
+  margin-top: 50px;
 }
 
 @keyframes App-logo-spin {
