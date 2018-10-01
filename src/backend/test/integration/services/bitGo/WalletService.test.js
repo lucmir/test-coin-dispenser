@@ -45,5 +45,23 @@ describe('WalletService', () => {
         }).catch();
       });
     });
+
+    it('fails when address is wrong', (done) => {
+      let amount = 10000;
+      let params = [
+        faucetWalletId,
+        'wrong-address',
+        amount,
+        faucetWalletPassphrase
+      ];
+      sessionService.createSession().then(session => {
+        WalletService(session).send(...params).then()
+          .catch(response => {
+            expect(response.result.error).toBe('invalid address');
+            done();
+          }
+        );
+      });
+    });
   });
 });

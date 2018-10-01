@@ -22,10 +22,18 @@ const WalletService = (session) => {
           wallet.send(params).then(transaction => {
             _lock(session).then(() => {
               resolve(transaction);
-            });
-          });
-        });
-      }).catch(err => reject(err));
+            }).catch(
+              err => reject(err)
+            );
+          }).catch(
+            err => reject(err)
+          );
+        }).catch(
+          err => reject(err)
+        );
+      }).catch(
+        err => reject(err)
+      );
     });
   };
 

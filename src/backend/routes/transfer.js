@@ -11,7 +11,10 @@ router.post('/', function(req, res) {
     .then(transferInfo => {
       transferInfo.amount = amount;
       res.status(201).send(formatTransferInfo(transferInfo));
-    }).catch();
+    }).catch(response => {
+      res.status(400).send(formatErrorResponse(response.result.error));
+    }
+  );
 });
 
 const formatTransferInfo = (transferInfo) => (
@@ -19,6 +22,12 @@ const formatTransferInfo = (transferInfo) => (
     id: transferInfo.txid,
     status: transferInfo.status,
     amount: transferInfo.amount 
+  }
+);
+
+const formatErrorResponse = (msg) => (
+  {
+    error: msg
   }
 );
 
