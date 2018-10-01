@@ -38,6 +38,11 @@ class CoinRequestForm extends React.Component {
     CoinDispenserClient.transfer(this.state.address).then(result => {
       this.processRequestResult(result);
     }).catch(result => {
+      if(!result.response) {
+        result.response = {
+          data: { error: 'Server error' }
+        };
+      }
       this.processRequestResult(result.response, true);
     });
     event.preventDefault();
@@ -73,7 +78,7 @@ class CoinRequestForm extends React.Component {
     return (
       <div className="ResultSuccess">
         <strong>
-          It was transferred {this.state.result.amount / 1e8} tbtc to your wallet!
+          We sent {this.state.result.amount / 1e8} tbitcoins to your wallet!
         </strong>
         <div className="FormResultContent"><p>ID: {this.state.result.id}</p></div>
       </div>
