@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
+
 let bitgo = require('bitgo');
 let SessionService = require('../../../../services/bitGo/SessionService');
 
@@ -10,16 +12,24 @@ describe('SessionService', () => {
     origin: 'test.bitgo.com'
   };
 
-  beforeEach(() => {
-    mockBitGoSession(false, sessionInfoData);
-    sessionService = SessionService('accessToken');
-  });
-
   describe('#createSession', () => {
     it('creates a session and returns session info', (done) => {
+      mockBitGoSession(false, sessionInfoData);
+      sessionService = SessionService('accessToken');
+
       sessionService.createSession().then(session => {
         expect(session).toBeDefined();
         expect(session.info).toBe(sessionInfoData);
+        done();
+      });
+    });
+
+    it('fails if unauthorized (wrong api token)', (done) => {
+      mockFailBitGoSession();
+      sessionService = SessionService('wrong-accessToken');
+
+      sessionService.createSession().then().catch(response => {
+        expect(response.result.error).toBe('unauthorized');
         done();
       });
     });
@@ -28,6 +38,20 @@ describe('SessionService', () => {
   const mockBitGoSession = (success, sessionData) => {
     var fakeSession = jest.fn().mockImplementation(
       (obj, cb) => { return cb(success, sessionData); }
+    );
+    var fakeBitGo = jest.fn(() => {
+      return { session: fakeSession };
+    });
+    bitgo.BitGo = fakeBitGo;
+  };
+
+  const mockFailBitGoSession = () => {
+    var fakeSession = jest.fn(
+      (_error) => Promise.reject({
+        result: {
+          error: 'unauthorized'
+        }
+      })
     );
     var fakeBitGo = jest.fn(() => {
       return { session: fakeSession };

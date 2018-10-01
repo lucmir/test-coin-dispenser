@@ -10,11 +10,13 @@ const SessionService = (accessToken) => {
     return new Promise((resolve, reject) => {
       bitgo.session({}, (err, sessionInfo) => {
         if (err) {
-          reject();
+          reject(err);
         }
         bitgo.info = sessionInfo;
         resolve(bitgo);
-      });
+      }).catch(
+        err => reject(err)
+      );
     });
   };
 

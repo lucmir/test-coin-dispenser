@@ -13,8 +13,7 @@ router.post('/', function(req, res) {
       res.status(201).send(formatTransferInfo(transferInfo));
     }).catch(response => {
       res.status(400).send(formatErrorResponse(response.result.error));
-    }
-    );
+    });
 });
 
 const formatTransferInfo = (transferInfo) => (
