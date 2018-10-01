@@ -78,7 +78,7 @@ class CoinRequestForm extends React.Component {
     return (
       <div className="ResultSuccess">
         <strong>
-          We sent {this.state.result.amount / 1e8} tbitcoins to your wallet!
+        We sent {this.state.result.amount / 1e8} tBTC to your wallet!
         </strong>
         <div className="FormResultContent"><p>ID: {this.state.result.id}</p></div>
       </div>

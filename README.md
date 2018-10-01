@@ -43,6 +43,18 @@ $ npm run start
 A web page will automatically open with the application page.
 
 
+### Running with Docker
+
+Alternatively, the application can be executed with Docker. Before running, it is necessary to set the environment variables on `/src/client/.env` and `/src/backend/.env` (see `/src/client/.env.example` and `/src/backend/.env.example`) or you can set the values directly in the `docker-compose.yml` file.
+
+The following command will build and run the application (backend and client app).
+```
+$ docker-compose build
+$ docker-compose up
+```
+The backend application will be exposed on *http://localhost:3000*. Client app will be available on *http://localhost*.
+
+
 ## Testing
 
 You can run all tests for the backend or client application by running `npm run test` from `src/backend` or `src/client`.

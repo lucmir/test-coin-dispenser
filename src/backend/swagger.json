@@ -93,6 +93,9 @@
         },
         "status": {
           "type": "string"
+        },
+        "ammount": {
+          "type": "string"
         }
       }
     }
