@@ -111,6 +111,7 @@ class CoinRequestForm extends React.Component {
                  className="FormInput"
                  value={this.state.address}
                  onChange={this.handleChange}
+                 disabled={this.state.requesting}
           />
           </label>
           <input type="submit"
