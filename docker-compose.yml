@@ -1,0 +1,28 @@
+version: '3'
+services:
+  client-app:
+    image: coin-dispenser-client
+    environment:
+      - REACT_APP_API_URL = 'backend'
+    build:
+      context: src/client
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+    depends_on:
+      - backend
+
+  backend:
+    image: coin-dispenser-backend
+    environment:
+       - BITGO_ACCESS_TOKEN
+       - TEST_WALLET_ID
+       - TEST_WALLET_ADDRESS
+       - FAUCET_WALLET_ID
+       - FAUCET_WALLET_PASSPHRASE
+       - FAUCET_TRANSFER_AMOUNT
+    build:
+      context: src/backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
