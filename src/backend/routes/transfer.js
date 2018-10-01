@@ -14,7 +14,7 @@ router.post('/', function(req, res) {
     }).catch(response => {
       res.status(400).send(formatErrorResponse(response.result.error));
     }
-  );
+    );
 });
 
 const formatTransferInfo = (transferInfo) => (

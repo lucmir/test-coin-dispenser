@@ -36,7 +36,7 @@ describe('FaucetService', () => {
         .then().catch(response => {
           expect(response.result.error).toBe('invalid address');
           done();
-      });
+        });
     });
   });
 });

@@ -37,15 +37,13 @@ describe('WalletService', () => {
       var walletService = WalletService(sessionMock);
 
       walletService.send(testWalletId, 'wrong-address', 0.1, '')
-        .then((response) => {
-          done();
-        })
+        .then()
         .catch(response => {
           expect(response).toBeDefined();
           expect(response.result.error).toBe('invalid address');
           done();
         }
-      );
+        );
     });
   });
 

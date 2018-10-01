@@ -60,7 +60,7 @@ describe('WalletService', () => {
             expect(response.result.error).toBe('invalid address');
             done();
           }
-        );
+          );
       });
     });
   });
