@@ -1,0 +1,49 @@
+.FormInput {
+  margin-top: 10px;
+  font-size: 0.6em;
+  width: 24%;
+  padding: 12px;
+  text-align: center; 
+}
+
+.FormLabel {
+  float: center;
+  width: 100px;
+  text-align: top;
+  margin: 2px 10px;
+}
+
+.SubmitInput {
+  margin-left: 5px;
+  background-color: #4CAF50;
+  border: none;
+  color: #FFFFFF;
+  padding: 12px 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  cursor: pointer; 
+}
+
+.SubmitInput:hover {
+  background-color: #51C055;
+}
+
+.SubmitInput:disabled {
+  background: #dddddd;
+  cursor: auto; 
+}
+
+.Spinner {
+  width: 140px;
+}
+
+.FormResult {
+  color: green; 
+  margin-top: 50px;
+}
+
+.FormResultContent {
+  color: black;  
+  font-size: 0.7em;
+}

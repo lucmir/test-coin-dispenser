@@ -13,4 +13,4 @@ class CoinDispenserClient {
   }
 }
 
-export default new CoinDispenserClient;
+export default new CoinDispenserClient();
